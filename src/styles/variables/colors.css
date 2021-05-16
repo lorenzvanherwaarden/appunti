@@ -3,7 +3,9 @@
     --rgb-accent: 189, 155, 22;
     --rgb-background: 249, 249, 249;
     --rgb-background-accent: 233, 236, 236;
-    --rgb-text: 10, 10, 10;
+    --rgb-text: 33, 33, 33;
+    --rgb-text-muted: 140, 130, 110;
+    --rgb-text-placeholder: 160, 160, 160;
     --rgb-border: 230, 230, 230;
 
     --color-white: rgb(var(--rgb-white));
@@ -11,5 +13,7 @@
     --color-background: rgb(var(--rgb-background));
     --color-background-accent: rgb(var(--rgb-background-accent));
     --color-text: rgb(var(--rgb-text));
+    --color-text-muted: rgb(var(--rgb-text-muted));
+    --color-text-placeholder: rgb(var(--rgb-text-placeholder));
     --color-border: rgb(var(--rgb-border));
 } 

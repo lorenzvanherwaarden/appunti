@@ -1,4 +1,12 @@
 import { createApp } from 'vue'
+import { createStore } from 'vuex'
+import note from './store/note'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const store = createStore({
+  modules: {
+    note,
+  }
+})
+
+createApp(App).use(store).mount('#app')

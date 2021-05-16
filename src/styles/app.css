@@ -1,6 +1,9 @@
+/* variables */
 @import './variables/colors.css';
 @import './variables/spacing.css';
 
+/* elements */
+@import './elements/generic.css';
 @import './elements/html.css';
 @import './elements/body.css';
 @import './elements/button.css';

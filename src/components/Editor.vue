@@ -1,38 +1,70 @@
 <template>
   <div class="editor">
-    <textarea :value="note" @input="handleInput" class="editor__textarea" />
+    <textarea v-model="note" class="editor__textarea" />
+    <div v-if="!note" class="editor__empty">
+      Edit here
+    </div>
   </div>
 </template>
 
 <script>
+import throttle from 'lodash/throttle'
+import { mapGetters } from 'vuex'
 
 export default {
-  props: {
-    note: String,
+  data() {
+    return {
+      note: this.$store.getters.getContent,
+    }
+  },
+
+  computed: {
+    ...mapGetters(['getContent']),
+  },
+
+  watch: {
+    note(){
+      this.handleNoteUpdate()
+    }
   },
 
   methods: {
-    handleInput(event) {
-      this.$emit('update:note', event.target.value)
-    }
-  }
+    handleNoteUpdate: throttle(function() {
+      this.$store.commit('setContent', this.note)
+    }, 50)
+  },
 }
 </script>
 
 <style scoped>
 .editor {
   flex: 1;
+  position: relative;
   border-top: solid 1px var(--color-border);
+}
+
+.editor:focus-within .editor__empty {
+  display: none;
 }
 
 .editor__textarea {
   outline: none;
   padding: var(--spacing-x-large);
-  width: calc(100% - 2 * var(--spacing-x-large));
-  height: calc(100% - 2 * var(--spacing-x-large));
+  width: 100%;
+  height: 100%;
   border: none;
   background: transparent;
+  color: var(--color-text);
+  resize: none;
   font-family: 'Source Code Pro', monospace;
   font-size: 1.6rem;
+}
+
+.editor__empty {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-text-placeholder);
 }
 </style>

@@ -7,13 +7,15 @@ import debounce from 'lodash/debounce'
 import marked from 'marked'
 
 export default {
-  props: {
-    note: String,
-  },
-
   data() {
     return {
       parsedNote: '',
+    }
+  },
+
+  computed: {
+    note() {
+      return this.$store.getters.getContent
     }
   },
 
@@ -34,6 +36,6 @@ export default {
 <style scoped>
 .preview {
   flex: 2;
-  padding: var(--spacing-x-large);
+  padding: var(--spacing-small) var(--spacing-x-large) var(--spacing-x-large);
 }
 </style>

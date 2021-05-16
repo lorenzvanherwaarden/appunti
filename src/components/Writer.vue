@@ -1,23 +1,15 @@
 <template>
   <div class="writer">
-    <Preview :note="note" />
-    <Editor :note="note" @update:note="note = $event" />
+    <NoteTitle />
+    <Preview />
+    <Editor />
   </div>
 </template>
 
 <script setup>
+import NoteTitle from './NoteTitle.vue'
 import Preview from './Preview.vue'
 import Editor from './Editor.vue'
-</script>
-
-<script>
-export default {
-  data() {
-    return {
-      note: ''
-    }
-  }
-}
 </script>
 
 <style scoped>
