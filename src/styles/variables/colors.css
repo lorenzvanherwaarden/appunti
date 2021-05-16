@@ -1,0 +1,15 @@
+:root {
+    --rgb-white: 255, 255, 255;
+    --rgb-accent: 189, 155, 22;
+    --rgb-background: 249, 249, 249;
+    --rgb-background-accent: 233, 236, 236;
+    --rgb-text: 10, 10, 10;
+    --rgb-border: 230, 230, 230;
+
+    --color-white: rgb(var(--rgb-white));
+    --color-accent: rgb(var(--rgb-accent));
+    --color-background: rgb(var(--rgb-background));
+    --color-background-accent: rgb(var(--rgb-background-accent));
+    --color-text: rgb(var(--rgb-text));
+    --color-border: rgb(var(--rgb-border));
+} 
