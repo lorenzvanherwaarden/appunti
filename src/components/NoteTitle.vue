@@ -14,7 +14,7 @@
 export default {
   computed: {
     title() {
-      return this.$store.getters.title
+      return this.$store.getters.getTitle
     }
   },
 
@@ -41,5 +41,6 @@ export default {
   font-size: 2.0rem;
   font-weight: 700;
   outline: none;
+  color: var(--color-text);
 }
 </style>

@@ -19,12 +19,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getContent']),
+    ...mapGetters(['getContent', 'getGuid']),
   },
 
   watch: {
     note(){
       this.handleNoteUpdate()
+    },
+
+    getGuid() {
+      this.note = this.getContent
     }
   },
 

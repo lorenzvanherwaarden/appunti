@@ -1,0 +1,11 @@
+.button--subtle {
+  height: 3rem;
+  padding: var(--spacing-x-small) var(--spacing-small);
+  font-size: 1.2rem;
+  background: transparent;
+  border: solid 1px var(--color-border);
+}
+
+.button--subtle:hover {
+  background-color: var(--color-border);
+}

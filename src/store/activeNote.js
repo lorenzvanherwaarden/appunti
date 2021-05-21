@@ -39,6 +39,12 @@ const actions = {
     commit('setGuid', getUuidv4())
     commit('setTitle', '')
     commit('setContent', '')
+  },
+
+  setNote({ commit }, note) {
+    commit('setGuid', note.guid)
+    commit('setTitle', note.title)
+    commit('setContent', note.content || '')
   }
 }
 

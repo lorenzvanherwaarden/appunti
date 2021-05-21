@@ -1,11 +1,13 @@
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
-import note from './store/note'
+import activeNote from './store/activeNote'
+import notes from './store/notes'
 import App from './App.vue'
 
 const store = createStore({
   modules: {
-    note,
+    activeNote,
+    notes,
   }
 })
 
