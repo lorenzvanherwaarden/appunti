@@ -1,14 +1,10 @@
 import { createApp } from 'vue'
-import { createStore } from 'vuex'
-import activeNote from './store/activeNote'
-import notes from './store/notes'
+import router from './router'
+import store from './store'
 import App from './App.vue'
 
-const store = createStore({
-  modules: {
-    activeNote,
-    notes,
-  }
-})
 
-createApp(App).use(store).mount('#app')
+createApp(App)
+  .use(store)
+  .use(router)
+  .mount('#app')

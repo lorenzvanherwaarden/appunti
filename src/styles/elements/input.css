@@ -1,0 +1,16 @@
+input {
+  appearance: none;
+  border: solid 2px var(--color-border);
+  border-radius: var(--radius-small);
+  height: 4.0rem;
+  padding: 0 var(--spacing-small);
+  font-size: var(--font-size);
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  color: var(--color-text);
+}
+
+input:focus {
+  border-color: var(--color-accent);
+}

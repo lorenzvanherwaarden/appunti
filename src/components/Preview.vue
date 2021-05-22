@@ -3,14 +3,14 @@
     <div class="preview" v-html="parsedNote" :style="'--font-size: calc(' + zoomLevel + ' * 1.5rem);'" />
     <div class="view-tools">
       <button 
-        class="button--subtle" 
+        class="button--subtle button--small" 
         :disabled="zoomLevel < 0.7"
         @click="decreaseZoom"
       >
         Zoom out
       </button>
       <button 
-        class="button--subtle"
+        class="button--subtle button--small"
         :disabled="zoomLevel > 1.6"
         @click="increaseZoom"
       >

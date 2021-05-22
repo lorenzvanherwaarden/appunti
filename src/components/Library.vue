@@ -3,7 +3,7 @@
     <h1 class="library__app-name u-user-select-none">Appunti</h1>
     <div class="library__folders">
       <h4 class="library__category u-user-select-none">
-        Notes
+        {{ repoName || 'notes' }}
       </h4>
       <div 
         :key="note.guid" 
@@ -14,17 +14,32 @@
         @click="setNote(note)"
       />
     </div>
-    <button @click="handleNewNote" class="library__new-note">
-      New note
+    <UserInfo />
+    <button v-if="!githubToken" @click="configureGithub">
+      Configure Github
     </button>
+    <div class="u-mt-x-small">
+      <button @click="handleNewNote" class="library__new-note">
+        New note
+      </button>
+    </div>
   </div>
 </template>
+
+<script setup>
+import UserInfo from './UserInfo.vue'
+</script>
 
 <script>
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters({notes: 'getNotes', activeNoteGuid: 'getGuid'})
+    ...mapGetters({
+      notes: 'getNotes', 
+      activeNoteGuid: 'getGuid', 
+      githubToken: 'getGithubToken',
+      repoName: 'getRepoName',
+    })
   },
 
   methods: {
@@ -34,6 +49,10 @@ export default {
 
     setNote(note) {
       this.$store.dispatch('setNote', note)
+    },
+
+    configureGithub() {
+      this.$router.push('settings')
     }
   }
 }

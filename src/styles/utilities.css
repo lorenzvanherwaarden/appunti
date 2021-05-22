@@ -1,3 +1,27 @@
 .u-user-select-none {
-  user-select: none;
+  user-select: none !important;
+}
+
+.u-mt-x-small {
+  margin-top: var(--spacing-x-small) !important;
+}
+
+.u-mb-x-small {
+  margin-bottom: var(--spacing-x-small) !important;
+}
+
+.u-mt-large {
+  margin-top: var(--spacing-large) !important;
+}
+
+.u-mb-large {
+  margin-bottom: var(--spacing-large) !important;
+}
+
+.u-mt-x-large {
+  margin-top: var(--spacing-x-large) !important;
+}
+
+.u-mb-x-large {
+  margin-bottom: var(--spacing-x-large) !important;
 }

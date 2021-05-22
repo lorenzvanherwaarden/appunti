@@ -38,7 +38,7 @@ export default {
   background-color: transparent;
   width: 100%;
   padding: var(--spacing-small) 0;
-  font-size: 2.0rem;
+  font-size: 3.0rem;
   font-weight: 700;
   outline: none;
   color: var(--color-text);

@@ -60,7 +60,7 @@ export default {
   background: transparent;
   color: var(--color-text);
   resize: none;
-  font-family: 'Source Code Pro', monospace;
+  font-family: var(--font-family-mono);
   font-size: 1.6rem;
 }
 

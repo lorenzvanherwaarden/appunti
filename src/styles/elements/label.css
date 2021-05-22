@@ -1,0 +1,6 @@
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: var(--spacing-x-small);
+  margin-top: var(--spacing-medium);
+}
