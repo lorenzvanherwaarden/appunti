@@ -78,7 +78,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 2;
-  padding: var(--spacing-small) var(--spacing-x-large) var(--spacing-x-large);
+  padding: var(--spacing-small) var(--spacing-x-large) var(--spacing-medium);
 }
 
 .preview {

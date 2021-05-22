@@ -1,5 +1,4 @@
-input {
-  appearance: none;
+select {
   border: solid 2px var(--color-border);
   border-radius: var(--radius-small);
   height: 4.0rem;
@@ -11,10 +10,10 @@ input {
   color: var(--color-text);
 }
 
-input:hover {
+select:hover {
   background: var(--color-white);
 }
 
-input:focus {
+select:focus {
   border-color: rgba(var(--rgb-accent), 0.5);
 }

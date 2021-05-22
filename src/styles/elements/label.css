@@ -1,6 +1,7 @@
 label {
   display: block;
   font-weight: 500;
+  font-size: 1.3rem;
   margin-bottom: var(--spacing-x-small);
   margin-top: var(--spacing-medium);
 }

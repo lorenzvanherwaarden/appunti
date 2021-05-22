@@ -1,4 +1,5 @@
 import axios from 'axios'
+import isValidMarkdownFile from '../utils/isValidMarkdownFile'
 
 const state = {
   notes: []
@@ -15,10 +16,16 @@ const actions = {
     const username = rootGetters.getUsername
     const repoName = rootGetters.getRepoName
 
+    if (!username || !repoName) {
+      return
+    }
+
     axios.get(`https://api.github.com/repos/${username}/${repoName}/contents`)
       .then(response => {
+        commit('setNotes', [])
+        
         response.data.forEach(file => {
-          if (!file.path.includes('/')) {
+          if (isValidMarkdownFile(file)) {
             commit('addNoteFromFile', file)
 
             if (file.size < 200) {

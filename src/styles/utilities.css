@@ -2,6 +2,14 @@
   user-select: none !important;
 }
 
+.u-mt-none {
+  margin-top: 0 !important;
+}
+
+.u-mb-none {
+  margin-bottom: 0 !important;
+}
+
 .u-mt-x-small {
   margin-top: var(--spacing-x-small) !important;
 }

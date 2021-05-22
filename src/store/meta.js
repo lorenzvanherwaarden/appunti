@@ -44,8 +44,8 @@ const actions = {
     }
   },
 
-  setupRepo({ state, commit, dispatch }) {
-    commit('setRepoName', state.repoName)
+  setupRepo({ state, commit, dispatch }, repoName) {
+    commit('setRepoName', repoName || state.repoName)
 
     if (!state.githubToken || !state.repoName || !state.username) {
       return
@@ -57,22 +57,22 @@ const actions = {
 
 const mutations = {
   setGithubToken(state, githubToken) {
-    window.localStorage.setItem('githubToken', githubToken)
+    githubToken && window.localStorage.setItem('githubToken', githubToken)
     state.githubToken = githubToken
   },
 
   setUsername(state, username) {
-    window.localStorage.setItem('username', username)
+    username && window.localStorage.setItem('username', username)
     state.username = username
   },
 
   setAvatarUrl(state, avatarUrl) {
-    window.localStorage.setItem('avatarUrl', avatarUrl)
+    avatarUrl && window.localStorage.setItem('avatarUrl', avatarUrl)
     state.avatarUrl = avatarUrl
   },
 
   setRepoName(state, repoName) {
-    window.localStorage.setItem('repoName', repoName)
+    repoName && window.localStorage.setItem('repoName', repoName)
     state.repoName = repoName
   }
 }
