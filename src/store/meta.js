@@ -51,7 +51,10 @@ const actions = {
       return
     }
 
-    dispatch('fetchNotes')
+    dispatch('fetchNotes', {
+      username: state.username,
+      repoName: state.repoName
+    })
   }
 }
 

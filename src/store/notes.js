@@ -8,18 +8,17 @@ const state = {
 const getters = {
   getNotes(state) {
     return state.notes
+  },
+
+  getNoteByGuid(state) {
+    return guid => {
+      return state.notes.find(note => note.guid === guid)
+    }
   }
 } 
 
 const actions = {
-  async fetchNotes({ rootGetters, commit, dispatch }) {
-    const username = rootGetters.getUsername
-    const repoName = rootGetters.getRepoName
-
-    if (!username || !repoName) {
-      return
-    }
-
+  async fetchNotes({ commit, dispatch }, { username, repoName }) {
     axios.get(`https://api.github.com/repos/${username}/${repoName}/contents`)
       .then(response => {
         commit('setNotes', [])
@@ -29,7 +28,7 @@ const actions = {
             commit('addNoteFromFile', file)
 
             if (file.size < 200) {
-              dispatch('fetchContent', file)
+              dispatch('fetchContent', { file, username, repoName })
             }
           }
         })
@@ -44,10 +43,7 @@ const actions = {
       })
   },
 
-  async fetchContent({ commit, rootGetters }, file) {
-    const username = rootGetters.getUsername
-    const repoName = rootGetters.getRepoName
-
+  async fetchContent({ commit }, { file, username, repoName }) {
     const response = await axios.get(`https://api.github.com/repos/${username}/${repoName}/contents/${file.name}`, {
       headers: {
         Accept: 'application/vnd.github.VERSION.raw'
@@ -57,7 +53,8 @@ const actions = {
     commit('setContentForNote', { guid: file.name, content: response.data })
   },
 
-  async updateNote({ rootGetters }, note) {
+  async saveNote({ rootGetters, commit }) {
+    const note = rootGetters.getActiveNote
     const username = rootGetters.getUsername
     const repoName = rootGetters.getRepoName
 
@@ -69,7 +66,12 @@ const actions = {
       content,
       sha: note.sha,
     })
-  }
+
+    commit('updateNote', {
+      guid: note.guid,
+      sha: response.data.sha
+    })
+  },
 }
 
 const mutations = {
@@ -98,6 +100,15 @@ const mutations = {
     state.notes.splice(noteIndex, 1, {
       ...state.notes[noteIndex],
       content,
+    })
+  },
+
+  updateNote(state, { guid, data }) {
+    const noteIndex = state.notes.findIndex(note => note.guid === guid)
+
+    state.notes.splice(noteIndex, 1, {
+      ...state.notes[noteIndex],
+      ...data,
     })
   }
 }

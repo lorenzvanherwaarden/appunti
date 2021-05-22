@@ -34,8 +34,11 @@ export default {
 
   methods: {
     handleNoteUpdate: throttle(function() {
-      this.$store.commit('setContent', this.note)
-    }, 50)
+      this.$store.commit('setContentForNote', {
+        guid: this.getGuid,
+        content: this.note
+      })
+    }, 100)
   },
 }
 </script>

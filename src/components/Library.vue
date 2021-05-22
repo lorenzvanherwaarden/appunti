@@ -48,7 +48,7 @@ export default {
     },
 
     setNote(note) {
-      this.$store.dispatch('setNote', note)
+      this.$store.dispatch('setActiveNote', note)
     },
 
     configureGithub() {
