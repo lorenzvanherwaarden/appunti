@@ -44,8 +44,8 @@ const actions = {
     }
   },
 
-  setupRepo({ state, commit, dispatch }, repoName) {
-    commit('setRepoName', repoName)
+  setupRepo({ state, commit, dispatch }) {
+    commit('setRepoName', state.repoName)
 
     if (!state.githubToken || !state.repoName || !state.username) {
       return

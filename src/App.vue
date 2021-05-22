@@ -12,6 +12,7 @@ import Container from './components/Container.vue'
 export default {
   created() {
     this.$store.dispatch('setupToken')
+    this.$store.dispatch('setupRepo')
   }
 }
 </script>

@@ -3,19 +3,27 @@
     <div class="preview" v-html="parsedNote" :style="'--font-size: calc(' + zoomLevel + ' * 1.5rem);'" />
     <div class="view-tools">
       <button 
-        class="button--subtle button--small" 
-        :disabled="zoomLevel < 0.7"
-        @click="decreaseZoom"
+        class="button--small" 
+        @click="save"
       >
-        Zoom out
+        Save note
       </button>
-      <button 
-        class="button--subtle button--small"
-        :disabled="zoomLevel > 1.6"
-        @click="increaseZoom"
-      >
-        Zoom in
-      </button>
+      <div>
+        <button 
+          class="button--subtle button--small" 
+          :disabled="zoomLevel < 0.7"
+          @click="decreaseZoom"
+        >
+          Zoom out
+        </button>
+        <button 
+          class="button--subtle button--small"
+          :disabled="zoomLevel > 1.6"
+          @click="increaseZoom"
+        >
+          Zoom in
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +31,7 @@
 <script>
 import debounce from 'lodash/debounce'
 import marked from 'marked'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -33,9 +42,11 @@ export default {
   },
 
   computed: {
-    note() {
-      return this.$store.getters.getContent
-    },
+    ...mapGetters({ note: 'getContent' }),
+  },
+
+  created() {
+    this.parse()
   },
 
   watch: {
@@ -45,6 +56,8 @@ export default {
   },
   
   methods: {
+    ...mapActions({ save: 'saveNote' }),
+
     parse: debounce(function() {
       this.parsedNote = marked(this.note)
     }, 100),
@@ -55,7 +68,7 @@ export default {
 
     decreaseZoom() {
       this.zoomLevel /= 1.25
-    }
+    },
   }
 }
 </script>
@@ -75,6 +88,6 @@ export default {
 
 .view-tools {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 </style>

@@ -4,6 +4,7 @@ const state = {
   guid: null,
   title: '',
   content: '',
+  sha: '',
 }
 
 const getters = {
@@ -17,6 +18,10 @@ const getters = {
 
   getContent(state) {
     return state.content
+  },
+
+  getSha(state) {
+    return state.sha
   }
 }
 
@@ -31,6 +36,10 @@ const mutations = {
 
   setContent(state, content) {
     state.content = content
+  },
+
+  setSha(state, sha) {
+    state.sha = sha
   }
 }
 
@@ -39,12 +48,18 @@ const actions = {
     commit('setGuid', getUuidv4())
     commit('setTitle', '')
     commit('setContent', '')
+    commit('setSha', '')
   },
 
   setNote({ commit }, note) {
     commit('setGuid', note.guid)
     commit('setTitle', note.title)
+    commit('setSha', note.sha)
     commit('setContent', note.content || '')
+  },
+
+  saveNote({ state, dispatch }) {
+    dispatch('updateNote', state)
   }
 }
 
