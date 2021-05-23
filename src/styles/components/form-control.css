@@ -1,4 +1,4 @@
-input {
+.form-control {
   appearance: none;
   border: solid 2px var(--color-border);
   border-radius: var(--radius-small);
@@ -11,10 +11,10 @@ input {
   color: var(--color-text);
 }
 
-input:hover {
+.form-control:hover {
   background: var(--color-white);
 }
 
-input:focus {
+.form-control:focus {
   border-color: rgba(var(--rgb-accent), 0.5);
 }

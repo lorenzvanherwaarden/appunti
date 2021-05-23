@@ -2,7 +2,7 @@
   <div v-if="noteGuid" class="writer">
     <NoteTitle />
     <Preview />
-    <Editor />
+    <Editor v-if="loaded" />
   </div>
   <div v-else class="empty-state">
     Please select a note or create a new one
@@ -20,7 +20,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters({ noteGuid: 'getGuid' })
+    ...mapGetters({ noteGuid: 'getGuid', loaded: 'getLoaded' })
   }
 }
 </script>

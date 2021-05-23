@@ -1,16 +1,17 @@
 <template>
   <div class="github-settings-container">
+    <BackButton />
     <h2 class="u-mt-none">
       Settings
     </h2>
     <label>
       Github token
     </label>
-    <input v-model="token" type="password" @paste="saveToken" class="input--mono" />
+    <input v-model="token" type="password" @paste="saveToken($event)" class="form-control" />
     <label>
       Repository
     </label>
-    <select v-if="token && repos" v-model="name">
+    <select v-if="token && repos" v-model="name" class="form-control">
       <option :key="repo" v-for="repo in repos" :value="repo">
         {{ repo }}
       </option>
@@ -20,6 +21,10 @@
     </button>
   </div>
 </template>
+
+<script setup>
+import BackButton from './BackButton.vue'
+</script>
 
 <script>
 import { mapGetters } from 'vuex'
@@ -42,11 +47,9 @@ export default {
   },
 
   methods: {
-    async saveToken() {
-      this.$nextTick(async function() {
-        await this.$store.dispatch('setGithubToken', this.token)
-        this.$store.dispatch('fetchRepos')
-      })
+    async saveToken(event) {
+      await this.$store.dispatch('setGithubToken', event.clipboardData.getData('text/plain'))
+      this.$store.dispatch('fetchRepos')
     },
 
     async save() {
@@ -61,7 +64,7 @@ export default {
 <style scoped>
 .github-settings-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   margin: var(--spacing-x-large);
 }
 </style>

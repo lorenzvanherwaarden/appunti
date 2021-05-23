@@ -59,6 +59,10 @@ export default {
     ...mapActions({ save: 'saveNote' }),
 
     parse: debounce(function() {
+      if (!this.note) {
+        return
+      }
+
       this.parsedNote = marked(this.note)
     }, 100),
 
@@ -78,16 +82,19 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 2;
+  overflow: auto;
   padding: var(--spacing-small) var(--spacing-x-large) var(--spacing-medium);
 }
 
 .preview {
   flex: 1;
   font-size: var(--font-size);
+  overflow: auto;
 }
 
 .view-tools {
   display: flex;
   justify-content: space-between;
+  margin-top: var(--spacing-medium);
 }
 </style>

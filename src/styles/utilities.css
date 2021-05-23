@@ -18,6 +18,22 @@
   margin-bottom: var(--spacing-x-small) !important;
 }
 
+.u-mt-small {
+  margin-top: var(--spacing-small) !important;
+}
+
+.u-mb-small {
+  margin-bottom: var(--spacing-small) !important;
+}
+
+.u-mt-medium {
+  margin-top: var(--spacing-medium) !important;
+}
+
+.u-mb-medium {
+  margin-bottom: var(--spacing-medium) !important;
+}
+
 .u-mt-large {
   margin-top: var(--spacing-large) !important;
 }

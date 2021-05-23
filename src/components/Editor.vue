@@ -34,10 +34,7 @@ export default {
 
   methods: {
     handleNoteUpdate: throttle(function() {
-      this.$store.commit('setContentForNote', {
-        guid: this.getGuid,
-        content: this.note
-      })
+      this.$store.commit('setContent', this.note)
     }, 100)
   },
 }
