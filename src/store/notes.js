@@ -1,4 +1,5 @@
 import axios from 'axios'
+import convertDashCaseToTitle from '../utils/convertDashCaseToTitle'
 import isValidMarkdownFile from '../utils/isValidMarkdownFile'
 
 const state = {
@@ -18,7 +19,7 @@ const getters = {
 } 
 
 const actions = {
-  async fetchNotes({ commit, dispatch }, { username, repoName }) {
+  async fetchNotes({ commit }, { username, repoName }) {
     axios.get(`https://api.github.com/repos/${username}/${repoName}/contents`)
       .then(response => {
         commit('setNotes', [])
@@ -48,7 +49,7 @@ const mutations = {
   addNoteFromFile(state, note) {
     const noteToAdd = {
       guid: note.name,
-      title: note.name,
+      title: convertDashCaseToTitle(note.name),
       sha: note.sha
     }
 

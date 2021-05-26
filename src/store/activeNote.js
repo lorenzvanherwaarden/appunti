@@ -1,12 +1,13 @@
 import axios from 'axios'
-import getUuidv4 from '../utils/getUuidv4'
+import convertDashCaseToTitle from '../utils/convertDashCaseToTitle'
+import convertToDashCase from '../utils/convertToDashCase'
 
 const state = {
   guid: null,
   title: null,
   content: null,
   sha: null,
-  loaded: false,
+  loaded: true,
 }
 
 const getters = {
@@ -59,7 +60,7 @@ const mutations = {
 
 const actions = {
   createNewNote({ commit }) {
-    commit('setGuid', getUuidv4())
+    commit('setGuid', 'create')
   },
 
   setActiveNote({ commit, dispatch, rootGetters }, note) {
@@ -86,6 +87,8 @@ const actions = {
   },
 
   async fetchContent({ commit }, { guid, username, repoName }) {
+    commit('setLoaded', false)
+
     const response = await axios.get(`https://api.github.com/repos/${username}/${repoName}/contents/${guid}`, {
       headers: {
         Accept: 'application/vnd.github.VERSION.raw'
@@ -100,16 +103,31 @@ const actions = {
     const username = rootGetters.getUsername
     const repoName = rootGetters.getRepoName
 
-    const message = `${state.title} updated on ${new Date()}`
     const content = btoa(state.content)
 
-    const response = await axios.put(`https://api.github.com/repos/${username}/${repoName}/contents/${state.guid}`, {
-      message,
-      content,
-      sha: state.sha,
-    })
+    if (state.guid === 'create') {
+      const message = `${state.title} created on ${new Date()}`
+      const guid = convertToDashCase(state.title)
 
-    dispatch('updateSha', response.data.content.sha)
+      await axios.put(`https://api.github.com/repos/${username}/${repoName}/contents/${guid}`, {
+        message,
+        content,
+      })
+
+      dispatch('fetchNotes', { username, repoName })
+    } else {
+      const message = `${state.title} updated on ${new Date()}`
+
+      // TODO: support updated title -> guid conversion
+
+      const response = await axios.put(`https://api.github.com/repos/${username}/${repoName}/contents/${state.guid}`, {
+        message,
+        content,
+        sha: state.sha,
+      })
+
+      dispatch('updateSha', response.data.content.sha)
+    }
   },
 }
 
