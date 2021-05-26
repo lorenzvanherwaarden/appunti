@@ -1,6 +1,6 @@
 import axios from 'axios'
 import convertDashCaseToTitle from '../utils/convertDashCaseToTitle'
-import convertToDashCase from '../utils/convertToDashCase'
+import convertToDashCase from '../utils/convertTitleToDashCase'
 
 const state = {
   guid: null,
