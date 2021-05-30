@@ -45,15 +45,16 @@ const actions = {
   },
 
   setupRepo({ state, commit, dispatch }, repoName) {
-    commit('setRepoName', repoName || state.repoName)
+    const name = repoName || state.repoName
+    commit('setRepoName', name)
 
-    if (!state.githubToken || !state.repoName || !state.username) {
+    if (!state.githubToken || !state.username || !name) {
       return
     }
 
     dispatch('fetchNotes', {
       username: state.username,
-      repoName: state.repoName
+      repoName: name,
     })
   }
 }

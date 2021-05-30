@@ -1,5 +1,4 @@
 import axios from 'axios'
-import convertDashCaseToTitle from '../utils/convertDashCaseToTitle'
 import convertToDashCase from '../utils/convertTitleToDashCase'
 
 const state = {
@@ -8,6 +7,7 @@ const state = {
   content: null,
   sha: null,
   loaded: true,
+  contentCache: {}
 }
 
 const getters = {
@@ -55,6 +55,10 @@ const mutations = {
 
   setLoaded(state, loaded) {
     state.loaded = loaded
+  },
+
+  setContentCache(state, { guid, content }) {
+    state.contentCache[guid] = content
   }
 }
 
@@ -63,8 +67,15 @@ const actions = {
     commit('setGuid', 'create')
   },
 
-  setActiveNote({ commit, dispatch, rootGetters }, note) {
-    commit('setLoaded', false)
+  setActiveNote({ commit, dispatch, state, rootGetters }, note) {
+    // store content of previous note in contentCache (if any)
+    if (state.content && state.sha) {
+      commit('setContentCache', {
+        guid: state.guid,
+        content: state.content
+      })
+    }
+
     commit('setGuid', note.guid)
     commit('setTitle', note.title)
     commit('setSha', note.sha)
@@ -86,7 +97,13 @@ const actions = {
     // todo: set title of note in notes
   },
 
-  async fetchContent({ commit }, { guid, username, repoName }) {
+  async fetchContent({ commit, state }, { guid, username, repoName }) {
+    const cachedContent = state.contentCache[guid]
+    if (cachedContent) {
+      commit('setContent', cachedContent)
+      return
+    }
+
     commit('setLoaded', false)
 
     const response = await axios.get(`https://api.github.com/repos/${username}/${repoName}/contents/${guid}`, {
