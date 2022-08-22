@@ -1,10 +1,10 @@
 .form-control {
-  appearance: none;
   border: solid 2px var(--color-border);
   border-radius: var(--radius-small);
-  height: 4.0rem;
+  height: 4rem;
   padding: 0 var(--spacing-small);
   font-size: var(--font-size);
+  font-family: var(--font-family);
   background-color: transparent;
   width: 100%;
   outline: none;

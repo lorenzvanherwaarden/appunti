@@ -3,14 +3,14 @@
     <h1 class="library__app-name u-user-select-none">Appunti</h1>
     <div class="library__folders">
       <h4 class="library__category u-user-select-none">
-        {{ repoName || 'notes' }}
+        {{ repoName || "notes" }}
       </h4>
-      <div 
-        :key="note.guid" 
+      <div
+        :key="note.guid"
         v-for="note in notes"
         v-text="note.title"
-        class="library__item u-user-select-none" 
-        :class="{'library__item--active': note.guid === activeNoteGuid}"
+        class="library__item u-user-select-none"
+        :class="{ 'library__item--active': note.guid === activeNoteGuid }"
         @click="setNote(note)"
       />
     </div>
@@ -19,43 +19,41 @@
       Configure Github
     </button>
     <div class="u-mt-x-small">
-      <button @click="handleNewNote" class="library__new-note">
-        New note
-      </button>
+      <button @click="handleNewNote" class="library__new-note">New note</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import UserInfo from './UserInfo.vue'
+import UserInfo from "./UserInfo.vue";
 </script>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters({
-      notes: 'getNotes', 
-      activeNoteGuid: 'getGuid', 
-      githubToken: 'getGithubToken',
-      repoName: 'getRepoName',
-    })
+      notes: "getNotes",
+      activeNoteGuid: "getGuid",
+      githubToken: "getGithubToken",
+      repoName: "getRepoName",
+    }),
   },
 
   methods: {
     handleNewNote() {
-      this.$store.dispatch('createNewNote')
+      this.$store.dispatch("createNewNote");
     },
 
     setNote(note) {
-      this.$store.dispatch('setActiveNote', note)
+      this.$store.dispatch("setActiveNote", note);
     },
 
     configureGithub() {
-      this.$router.push('settings')
-    }
-  }
-}
+      this.$router.push("settings");
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -66,7 +64,6 @@ export default {
   max-width: 32rem;
   background-color: var(--color-background-accent);
   padding: var(--spacing-large);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-right: solid 1px var(--color-border);
 }
 

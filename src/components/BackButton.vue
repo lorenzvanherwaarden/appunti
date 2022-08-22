@@ -1,8 +1,6 @@
 <template>
   <div class="u-mb-medium">
-     <a href="" @click="back" class="back-button">
-      ᐊ Back
-    </a>
+    <a href="" @click="back" class="back-button"> ← Back </a>
   </div>
 </template>
 
@@ -10,10 +8,10 @@
 export default {
   methods: {
     back() {
-      this.$router.go(-1)
-    }
-  }
-}
+      this.$router.go(-1);
+    },
+  },
+};
 </script>
 
 <style scoped>
